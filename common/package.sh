@@ -35,3 +35,21 @@ sed -i "s/<TODAY>/${NOW}/" ${WORKING_DIR}/metadata.json
 log 'Packaging box'
 TARBALL=$(readlink -f ${PACKAGE})
 (cd ${WORKING_DIR} && tar -czf $TARBALL ./*)
+
+PACKAGE_DIR=$(dirname ${PACKAGE})
+cat <<EOF > ${PACKAGE_DIR}/metadata.json
+{
+  "name": "anapaya/xenial64-lxc",
+  "versions": [
+  {
+      "version": "$(date -u +"%Y%m%d"){$VER:-00}",
+      "providers": [
+        {
+          "name": "lxc",
+          "url": "${PACKAGE_DIR}/vagrant-lxc-xenial-amd64.box"
+        }
+      ]
+    }
+  ]
+}
+EOF
