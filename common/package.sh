@@ -35,3 +35,23 @@ sed -i "s/<TODAY>/${NOW}/" ${WORKING_DIR}/metadata.json
 log 'Packaging box'
 TARBALL=$(readlink -f ${PACKAGE})
 (cd ${WORKING_DIR} && tar -czf $TARBALL ./*)
+
+PACKAGE_DIR=$(dirname ${PACKAGE})
+NAME=$(basename ${PACKAGE} .box)
+NAME=${NAME#vagrant-}
+cat <<EOF > ${PACKAGE_DIR}/metadata.json
+{
+  "name": "anapaya/${NAME}",
+  "versions": [
+  {
+      "version": "$(date -u +"%Y%m%d")${VER:-00}",
+      "providers": [
+        {
+          "name": "lxc",
+          "url": "${PACKAGE}"
+        }
+      ]
+    }
+  ]
+}
+EOF
