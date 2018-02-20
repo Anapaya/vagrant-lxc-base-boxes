@@ -1,0 +1,13 @@
+curl
+ethtool
+freeipmi-tools
+iptables
+netcat-openbsd
+python
+rsync
+software-properties-common
+sudo
+tcpdump
+tmux
+vim-nox
+vlan
