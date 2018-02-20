@@ -45,3 +45,8 @@ if [ $DISTRIBUTION = 'debian' ]; then
     -i ${ROOTFS}/etc/bash.bashrc
 fi
 
+utils.lxc.attach add-apt-repository -y ppa:wireguard/wireguard
+utils.lxc.attach apt-get update
+utils.lxc.attach apt-get install -y --no-install-recommends wireguard-dkms wireguard-tools
+utils.lxc.attach echo wireguard-dkms hold|dpkg --set-selections
+utils.lxc.attach echo wireguard-tools hold|dpkg --set-selections
