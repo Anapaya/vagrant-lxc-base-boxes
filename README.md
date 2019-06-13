@@ -32,44 +32,26 @@ This repository contains a set of scripts for creating base boxes for usage with
   - 6 x86_64
   - 7 x86_64
 
-## Building the boxes
+## Build and upload an lxc box
 
-_In order to build the boxes you need to have the `lxc-download`
-template available on your machine. If you don't have one around please
-create one based on [this](https://github.com/lxc/lxc/blob/master/templates/lxc-download.in)
-and drop it on your lxc templates path (usually `/usr/share/lxc/templates`)._
+We are now providing a prebuilt base box in the cloud, but below are the steps
+involved to build your own local base box:
+- `git clone https://github.com/anapaya/vagrant-lxc-base-boxes`
+- `cd vagrant-lxc-base-boxes`
+- `make xenial`
 
-```sh
-git clone https://github.com/obnoxxx/vagrant-lxc-base-boxes.git
-cd vagrant-lxc-base-boxes
-make precise
-```
+This will generate a .box file in the output folder which you can uplaod to https://app.vagrantup.com :
+- Get permissions for our Vagrant cloud
+- Select anapaya/lxc-xenial-amd64
+- Create a New Version - Version: <DATE>
+- Add a provider - select lxc, continue to upload
+- upload the .box file from output
+- Release
 
-By default no provisioning tools will be included but you can pick the ones
-you want by providing some environmental variables. For example:
+To test this new box update the config.vm.box_version field in the ansible repo test/Vagrantfile and follow the steps in the readme to generate lxc boxes. If it works consider creating a PR with the newer box.
 
-```sh
-ANSIBLE=1 PUPPET=1 CHEF=1 SALT=1 BABUSHKA=1 \
-make precise
-```
-
-Will build a Ubuntu Precise x86_64 box with latest Ansible, Puppet, Chef, Salt and
-Babushka pre-installed.
-
-When using ANSIBLE=1, an optional ANSIBLE_VERSION parameter may be passed that will specify which version of ansible to install. By default it will install the latest Ansible.
-
-Additional packages to be installed can be specified with the ADDPACKAGES variable:
-
-```sh
-ADDPACKAGES="aptitude htop" \
-make trusty
-```
-
-Will build a Ubuntu Trusty x86_64 box with aptitude and htop as additional
-packages pre-installed. You can also specify the packages in a file
-trusty_packages.
-
-Note: ADDPACKAGES is currently only implemented for flavors of debian.
+### Cleanup
+`make clean`
 
 ## Pre built base boxes
 
