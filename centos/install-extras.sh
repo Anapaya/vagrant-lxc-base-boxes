@@ -28,3 +28,4 @@ fi
 
 utils.lxc.attach yum update -y
 utils.lxc.attach yum install ${PACKAGES[*]} -y
+utils.lxc.attach yum install python3 -y
