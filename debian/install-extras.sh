@@ -34,10 +34,6 @@ fi
 if [ $RELEASE = 'jessie' ]; then
   PACKAGES+=' dbus'
 fi
-if [ $RELEASE = 'bionic' ]; then
-  PACKAGES+=' ifupdown'
-fi
-
 
 utils.lxc.attach apt-get update
 utils.lxc.attach apt-get install ${PACKAGES[*]} -y --force-yes

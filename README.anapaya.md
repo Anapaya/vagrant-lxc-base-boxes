@@ -5,6 +5,7 @@ involved to build your own local base box:
 - `git clone https://github.com/anapaya/vagrant-lxc-base-boxes`
 - `cd vagrant-lxc-base-boxes`
 - `make xenial` for building Ubuntu 16.04
+- `make bionic` for building Ubuntu 18.04
 - `make 7` for building CentOS 7 with EPEL repositories
 
 This will generate a .box file in the output folder which you can uplaod to https://app.vagrantup.com :
