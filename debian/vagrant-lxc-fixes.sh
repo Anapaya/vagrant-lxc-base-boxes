@@ -42,11 +42,18 @@ if [ ${DISTRIBUTION} = 'debian' ]; then
 	  # Mask udev.service and systemd-udevd.service:
 	  utils.lxc.attach /bin/systemctl mask udev.service systemd-udevd.service
   fi
-  if [ "$RELEASE" = 'bionic' ] || [ "$RELEASE" = 'buster' ]; then
+  if [ "$RELEASE" = 'buster' ]; then
       utils.lxc.attach /bin/systemctl mask container-getty@.service
   fi
 fi
 
+if [ "$DISTRIBUTION" = 'ubuntu' ]; then
+  if [ "$RELEASE" = 'bionic' ]; then
+    log "Removing netplan, using ifupdown instead"
+    utils.lxc.attach apt purge netplan
+    utils.lxc.attach /bin/mkdir -p /etc/network/interfaces.d
+  fi
+fi
 utils.lxc.attach /usr/sbin/locale-gen ${LANG}
 utils.lxc.attach update-locale LANG=${LANG}
 
