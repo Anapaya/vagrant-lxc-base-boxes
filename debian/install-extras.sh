@@ -45,8 +45,10 @@ if [ $DISTRIBUTION = 'debian' ]; then
     -i ${ROOTFS}/etc/bash.bashrc
 fi
 
-utils.lxc.attach add-apt-repository -y ppa:wireguard/wireguard
+# XXX(mkowalski) Install Wireguard from Anapaya repo instead of upstream
+# so that we can always controll which version is getting installed
+echo "deb [trusted=yes] https://dl.cloudsmith.io/FzCAHur4Saj2hadQ/anapaya/internal/deb/ubuntu bionic main" > ${ROOTFS}/etc/apt/sources.list.d/anapaya-internal.list
 utils.lxc.attach apt-get update
-utils.lxc.attach apt-get install -y --no-install-recommends wireguard-dkms wireguard-tools
-utils.lxc.attach echo wireguard-dkms hold|dpkg --set-selections
-utils.lxc.attach echo wireguard-tools hold|dpkg --set-selections
+utils.lxc.attach apt-get install -y wireguard wireguard-dkms wireguard-tools
+utils.lxc.attach apt-get install -y docker docker-compose
+utils.lxc.attach rm /etc/apt/sources.list.d/anapaya-internal.list
