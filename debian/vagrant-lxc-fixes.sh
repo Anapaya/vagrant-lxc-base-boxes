@@ -50,6 +50,10 @@ fi
 if [ "$DISTRIBUTION" = 'ubuntu' ]; then
   if [ "$RELEASE" = 'bionic' ]; then
     log "Removing netplan, using ifupdown instead"
+    # XXX(mkowalski) https://bugs.launchpad.net/ubuntu/+source/ltsp/+bug/1802707
+    for var in LC_ALL= LANG= ; do
+        export "$var"en_US.UTF-8
+    done
     utils.lxc.attach apt purge netplan
     utils.lxc.attach /bin/mkdir -p /etc/network/interfaces.d
   fi
