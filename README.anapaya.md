@@ -18,5 +18,9 @@ This will generate a .box file in the output folder which you can uplaod to http
 
 To test this new box update the config.vm.box_version field in the ansible repo test/Vagrantfile and follow the steps in the readme to generate lxc boxes. If it works consider creating a PR with the newer box.
 
+### Cloudsmith.io credentials
+
+There is a hardcoded Cloudsmith entitlement token in the script building an image. As this should not be used by the general public, the token has been disabled via https://cloudsmith.io/~anapaya/repos/internal/entitlements/?show_disabled=true. It should be enabled by the person building the new image and disabled shortly afterwards.
+
 ### Cleanup
 `make clean`
