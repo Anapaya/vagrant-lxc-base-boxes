@@ -15,6 +15,7 @@ python3-openssl
 python3-pip
 python3-requests
 python3-setuptools
+python3-yaml
 software-properties-common
 strace
 sudo
