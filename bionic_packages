@@ -21,3 +21,10 @@ sudo
 tcpdump
 traceroute
 vlan
+conntrack
+iptables
+iptables-persistent
+resolvconf
+apt-transport-https
+ca-certificates
+libffi-dev
