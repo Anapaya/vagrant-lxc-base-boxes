@@ -42,5 +42,12 @@ infiniband-diags
 perftest
 mstflint
 ibverbs-providers
+process-exporter
+wireguard
+wireguard-dkms
+wireguard-tools
+quagga-core
+quagga-bgpd
+docker-ce
 eatmydata
 ulogd2
